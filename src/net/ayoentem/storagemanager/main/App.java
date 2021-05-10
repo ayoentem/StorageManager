@@ -9,19 +9,28 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import javafx.scene.image.Image;
+import net.ayoentem.storagemanager.utils.backup.BackUp;
+import net.ayoentem.storagemanager.utils.database.MySQLConnection;
 
 /**
  * JavaFX App
  */
 public class App extends Application {
 
-    
     public void start(Stage stage) throws IOException {
+
+        MySQLConnection mysql = new MySQLConnection("localhost", "db_ayoentem", "root", "", "3306");
+        mysql.connect();
+
+        System.out.println(System.getProperty("user.home"));
+
         //stage.getIcons().add(new Image("icon.png"));
         FXMLLoader loadFXML = loadFXML("../utils/fxml/main");
         Parent view = loadFXML.load();
+
         MainController controller = loadFXML.getController();
         controller.init2(stage);
+
         Scene scene = new Scene(view);
         stage.setScene(scene);
         stage.setTitle("StorageManager v1.0");
