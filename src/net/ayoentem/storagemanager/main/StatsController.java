@@ -18,19 +18,14 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import net.ayoentem.storagemanager.utils.database.MySQLConnection;
 
 /**
  * FXML Controller class
@@ -53,6 +48,10 @@ public class StatsController {
     private Label lblError;
     @FXML
     private Label lblPath;
+    @FXML
+    private Button btnBack;
+
+    private MySQLConnection connection;
 
     private Stage stage;
     private File file;
@@ -60,7 +59,8 @@ public class StatsController {
     private HashMap<String, File> fileMap = new HashMap<>();
     private Timeline task;
 
-    public void init2(File file, Stage stage) {
+    public void init2(File file, Stage stage, MySQLConnection connection) {
+        this.connection = connection;
         this.stage = stage;
         lblPath.setText("Search for Files in " + file.getPath());
         loading();
@@ -101,6 +101,20 @@ public class StatsController {
     }
 
     @FXML
+    public void goBack(MouseEvent event){
+        try{
+            App.switchScreen(file.getParentFile(), "../utils/fxml/stats.fxml", this.stage, "/Stats.css", this.connection);
+        }catch (IOException ex) {
+            try {
+                App.switchToMainScreen(this.stage, this.connection);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            lblError.setText(ex.getMessage());
+        }
+    }
+
+    @FXML
     public void recursiveDirectory(MouseEvent event) {
         /**
          * @TODO:
@@ -111,7 +125,7 @@ public class StatsController {
         File file = new File(selectedItem.getDirectory());
         if (selectedItem.getFiDiContain() != 0) {
             try {
-                App.switchScreen(file, "../utils/fxml/stats.fxml", this.stage, "../utils/css/Stats.css");
+                App.switchScreen(file, "../utils/fxml/stats.fxml", this.stage, "/Stats.css", this.connection);
             } catch (IOException ex) {
                 lblError.setText(ex.getMessage());
             }

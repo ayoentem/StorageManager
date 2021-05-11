@@ -16,13 +16,13 @@
     <children>
         <AnchorPane prefHeight="441.0" prefWidth="953.0">
             <children>
-                <ListView fx:id="chartList" layoutX="484.0" layoutY="76.0" onMouseClicked="#clickedON" prefHeight="337.0" prefWidth="191.0" />
+                <ListView fx:id="chartList" layoutX="287.0" layoutY="197.0" onMouseClicked="#clickedON" prefHeight="218.0" prefWidth="388.0" />
                 <Label alignment="CENTER" layoutY="-2.0" prefHeight="32.0" prefWidth="206.0" text="Storage Manager">
                     <font>
                         <Font name="Arial Bold" size="21.0" />
                     </font>
                 </Label>
-                <Label layoutX="484.0" layoutY="50.0" prefHeight="17.0" prefWidth="135.0" text="Drivers" textAlignment="CENTER">
+                <Label alignment="CENTER" layoutX="414.0" layoutY="173.0" prefHeight="17.0" prefWidth="135.0" text="Drivers" textAlignment="CENTER">
                     <font>
                         <Font name="Arial Bold" size="15.0" />
                     </font>
@@ -38,20 +38,14 @@
                         <Font name="Arial" size="12.0" />
                     </font>
                 </Button>
-                <TextField fx:id="txtPathBackup" layoutX="14.0" layoutY="131.0" prefHeight="25.0" prefWidth="350.0" promptText="Path for Backup" />
-                <Button fx:id="btnChoose2" layoutX="373.0" layoutY="132.0" mnemonicParsing="false" onMouseClicked="#chooseDirectory2" text="Choose">
-                    <font>
-                        <Font name="Arial" size="12.0" />
-                    </font>
-                </Button>
-                <Label layoutX="7.0" layoutY="183.0" prefHeight="17.0" prefWidth="135.0" text="Interval">
+                <Label layoutY="138.0" prefHeight="17.0" prefWidth="135.0" text="Interval">
                     <font>
                         <Font name="Arial Bold" size="15.0" />
                     </font>
                 </Label>
-                <ChoiceBox fx:id="listInterval" layoutX="14.0" layoutY="221.0" prefWidth="150.0" />
-                <CheckBox layoutX="111.0" layoutY="378.0" mnemonicParsing="false" text="Activate Backup" />
-                <Button layoutX="14.0" layoutY="374.0" mnemonicParsing="false" text="Backup now" />
+                <ChoiceBox fx:id="listInterval" layoutX="14.0" layoutY="173.0" prefWidth="150.0" />
+                <CheckBox fx:id="isActive" layoutX="111.0" layoutY="378.0" mnemonicParsing="false" text="Activate Backup" />
+                <Button fx:id="btnBackup" layoutX="14.0" layoutY="374.0" mnemonicParsing="false" onMouseClicked="#doBackup" text="Backup now" />
             <Label layoutX="7.0" layoutY="268.0" prefHeight="17.0" prefWidth="135.0" text="Restore">
                <font>
                   <Font name="Arial Bold" size="15.0" />
@@ -68,7 +62,7 @@
                   <Font name="Arial" size="12.0" />
                </font>
             </Label>
-            <Label layoutX="175.0" layoutY="225.0" prefHeight="17.0" prefWidth="256.0" text="Last Update on ">
+            <Label fx:id="lblLastBackup" contentDisplay="TEXT_ONLY" focusTraversable="false" layoutX="14.0" layoutY="221.0" prefHeight="17.0" prefWidth="256.0" text="Last Backup:  ">
                <font>
                   <Font name="Arial" size="12.0" />
                </font></Label>

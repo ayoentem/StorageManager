@@ -63,7 +63,6 @@ public class MySQLConnection {
 
     public ResultSet query(String qry) {
         ResultSet rs = null;
-
         try {
             Statement st = connection.createStatement();
             rs = st.executeQuery(qry);
@@ -72,6 +71,20 @@ public class MySQLConnection {
             System.err.println(e);
         }
         return rs;
+    }
+
+    public boolean existTable(String tableName) {
+        DatabaseMetaData meta = null;
+        ResultSet resultSet = null;
+        boolean exist = false;
+        try{
+                meta = connection.getMetaData();
+                resultSet = meta.getTables(null, null, tableName, new String[] {"TABLE"});
+                exist = resultSet.next();
+        }catch(SQLException ex){
+            return false;
+        }
+        return exist;
     }
 
 }

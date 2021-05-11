@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import javafx.scene.image.Image;
 import net.ayoentem.storagemanager.utils.backup.BackUp;
+import net.ayoentem.storagemanager.utils.backup.BackUpInterval;
 import net.ayoentem.storagemanager.utils.database.MySQLConnection;
 
 /**
@@ -19,21 +20,20 @@ public class App extends Application {
 
     public void start(Stage stage) throws IOException {
 
-        MySQLConnection mysql = new MySQLConnection("localhost", "db_ayoentem", "root", "", "3306");
+        MySQLConnection mysql = new MySQLConnection("localhost", "storagemanager", "root", "", "3306");
         mysql.connect();
-
-        System.out.println(System.getProperty("user.home"));
 
         //stage.getIcons().add(new Image("icon.png"));
         FXMLLoader loadFXML = loadFXML("../utils/fxml/main");
         Parent view = loadFXML.load();
+        view.getStylesheets().add("/Stats.css");
 
         MainController controller = loadFXML.getController();
-        controller.init2(stage);
+        controller.init2(stage, mysql);
 
         Scene scene = new Scene(view);
         stage.setScene(scene);
-        stage.setTitle("StorageManager v1.0");
+        stage.setTitle("StorageManager v1.0.0");
         stage.show();
     }
 
@@ -46,13 +46,13 @@ public class App extends Application {
         launch();
     }
     
-    public static void switchScreen(File file, String fxml, Stage stage, String pathStyleSheet) throws IOException{
+    public static void switchScreen(File file, String fxml, Stage stage, String pathStyleSheet, MySQLConnection connection) throws IOException{
             FXMLLoader loader = new FXMLLoader(StatsController.class.getResource(fxml));
 
             Parent neueView = loader.load();
 
             StatsController statsController = loader.getController();
-            statsController.init2(file, stage);
+            statsController.init2(file, stage, connection);
 
             Scene scene = new Scene(neueView);
             
@@ -60,6 +60,22 @@ public class App extends Application {
             
             stage.setScene(scene);
             stage.show();
+    }
+
+    public static void switchToMainScreen(Stage stage, MySQLConnection connection) throws IOException {
+        FXMLLoader loader = new FXMLLoader(MainController.class.getResource("../utils/fxml/main.fxml"));
+
+        Parent neueView = loader.load();
+
+        MainController mainController = new MainController();
+        mainController.init2(stage, connection);
+
+        Scene scene = new Scene(neueView);
+
+        scene.getStylesheets().add("/Stats.css");
+
+        stage.setScene(scene);
+        stage.show();
     }
 
 }
