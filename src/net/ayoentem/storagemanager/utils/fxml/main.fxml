@@ -38,21 +38,14 @@
                         <Font name="Arial" size="12.0" />
                     </font>
                 </Button>
-                <Label layoutY="138.0" prefHeight="17.0" prefWidth="135.0" text="Interval">
-                    <font>
-                        <Font name="Arial Bold" size="15.0" />
-                    </font>
-                </Label>
-                <ChoiceBox fx:id="listInterval" layoutX="14.0" layoutY="173.0" prefWidth="150.0" />
-                <CheckBox fx:id="isActive" layoutX="111.0" layoutY="378.0" mnemonicParsing="false" text="Activate Backup" />
-                <Button fx:id="btnBackup" layoutX="14.0" layoutY="374.0" mnemonicParsing="false" onMouseClicked="#doBackup" text="Backup now" />
-            <Label layoutX="7.0" layoutY="268.0" prefHeight="17.0" prefWidth="135.0" text="Restore">
+                <Button fx:id="btnBackup" layoutX="14.0" layoutY="371.0" mnemonicParsing="false" onMouseClicked="#doBackup" text="Backup now" />
+            <Label layoutX="7.0" layoutY="197.0" prefHeight="17.0" prefWidth="135.0" text="Restore">
                <font>
                   <Font name="Arial Bold" size="15.0" />
                </font>
             </Label>
-            <ChoiceBox fx:id="listBackups" layoutX="14.0" layoutY="305.0" prefWidth="150.0" />
-            <Button fx:id="btnChoose11" layoutX="188.0" layoutY="306.0" mnemonicParsing="false" text="Restore">
+            <ChoiceBox fx:id="listBackups" layoutX="7.0" layoutY="294.0" prefWidth="150.0" />
+            <Button fx:id="btnChoose11" layoutX="177.0" layoutY="295.0" mnemonicParsing="false" text="Restore">
                <font>
                   <Font name="Arial" size="12.0" />
                </font>
@@ -62,7 +55,7 @@
                   <Font name="Arial" size="12.0" />
                </font>
             </Label>
-            <Label fx:id="lblLastBackup" contentDisplay="TEXT_ONLY" focusTraversable="false" layoutX="14.0" layoutY="221.0" prefHeight="17.0" prefWidth="256.0" text="Last Backup:  ">
+            <Label fx:id="lblLastBackup" contentDisplay="TEXT_ONLY" focusTraversable="false" layoutX="14.0" layoutY="146.0" prefHeight="17.0" prefWidth="256.0" text="Last Backup:  ">
                <font>
                   <Font name="Arial" size="12.0" />
                </font></Label>

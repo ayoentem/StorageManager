@@ -9,16 +9,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import net.ayoentem.storagemanager.utils.backup.BackUp;
-import net.ayoentem.storagemanager.utils.backup.BackUpInterval;
-import net.ayoentem.storagemanager.utils.backup.IntervalEnum;
 import net.ayoentem.storagemanager.utils.database.MySQLConnection;
 
 public class MainController {
 
     @FXML
     private ListView<String> chartList;
-    @FXML
-    private ChoiceBox<IntervalEnum> listInterval;
     @FXML
     private ChoiceBox<String> listBackups;
     @FXML
@@ -28,8 +24,6 @@ public class MainController {
     @FXML
     private TextField txtPathData;
     @FXML
-    private CheckBox isActive;
-    @FXML
     private Label lblLastBackup;
     @FXML
     private Button btnBackup;
@@ -37,37 +31,21 @@ public class MainController {
     private Stage stage;
     private MySQLConnection connection;
     private BackUp backUp;
+    private App app;
 
     
-    public void init2(Stage stage, MySQLConnection connection) {
+    public void init2(App app, Stage stage, MySQLConnection connection) {
+        this.app = app;
         this.stage = stage;
         this.connection = connection;
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.YYYY");
-
-        //Load Interval Table
-        BackUpInterval interval = new BackUpInterval();
-        interval.init(connection, "BACKUP");
-
-        //Aktuell abgespeichertes
-        listInterval.getSelectionModel().select(IntervalEnum.valueOf(interval.getInterval().toString()));
-        isActive.setSelected(interval.isActiveBackup());
-        if(interval.getLastBackUp() == null){
-            lblLastBackup.setText("NO LAST BACKUP");
-        }else{
-            lblLastBackup.setText(lblLastBackup.getText() + " " + sdf.format(interval.getLastBackUp()));
-        }
 
         File[] listRoots = File.listRoots();
 
         //Load RestoreList
         backUp = new BackUp(connection, listBackups);
         backUp.init();
-
-        //Load IntervalList
-        for (IntervalEnum intervals : IntervalEnum.values()) {
-            listInterval.getItems().add(intervals);
-        }
 
         //Load Drivers
         for (int i = 0; i < listRoots.length; i++) {
@@ -94,7 +72,8 @@ public class MainController {
     public void clickedON(MouseEvent event) {
         File file = new File(chartList.getSelectionModel().getSelectedItem().substring(0, 1) + ":/");
         try {
-            App.switchScreen(file, "../utils/fxml/stats.fxml", this.stage, "/Stats.css", this.connection);
+            app.switchScreen(file, StatsController.class.getResource("../utils/fxml/stats.fxml"), this.stage);
+
         } catch (IOException ex) {
             ex.printStackTrace();
         }

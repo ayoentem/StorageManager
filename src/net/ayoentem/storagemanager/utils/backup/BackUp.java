@@ -55,12 +55,12 @@ public class BackUp {
             try {
                 String curDate = sdf.format(new Date());
                 Path existingPath = FileSystems.getDefault().getPath(this.pathData);
-                File backupDir = new File(System.getProperty("user.home") + "//.storageManager//backups//" + "StorageManager-" + curDate);
+                File backupDir = new File(System.getProperty("user.home") + "/.storageManager/backups/" + "StorageManager-" + curDate);
                 backupDir.mkdirs();
 
                 connection.update("UPDATE backup SET lastBackup=CURDATE();");
 
-                FileOutputStream fos = new FileOutputStream(System.getProperty("user.home") + "//.storageManager//backups//" + "StorageManager-" + curDate + "/BackUp.zip");
+                FileOutputStream fos = new FileOutputStream(System.getProperty("user.home") + "/.storageManager/backups/" + "StorageManager-" + curDate + "/BackUp.zip");
                 ZipOutputStream zipOut = new ZipOutputStream(fos);
 
                 zipFile(existingPath.toFile(), existingPath.toFile().getName(), zipOut);
@@ -76,8 +76,11 @@ public class BackUp {
     }
 
     private void copyFolder(Path src, Path dest) throws IOException {
-        try (Stream<Path> stream = Files.walk(src)) {
+        try{
+                Stream<Path> stream = Files.walk(src);
             stream.forEach(source -> copy(source, dest.resolve(src.relativize(source))));
+        }catch(Exception e){
+            throw new RuntimeException(e.getMessage(), e);
         }
     }
 

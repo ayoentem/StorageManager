@@ -1,6 +1,7 @@
 package net.ayoentem.storagemanager.main;
 
 import java.io.File;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,9 +9,10 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import javafx.scene.image.Image;
-import net.ayoentem.storagemanager.utils.backup.BackUp;
-import net.ayoentem.storagemanager.utils.backup.BackUpInterval;
+import java.net.URL;
+
+import jfxtras.styles.jmetro.JMetro;
+import jfxtras.styles.jmetro.Style;
 import net.ayoentem.storagemanager.utils.database.MySQLConnection;
 
 /**
@@ -18,64 +20,65 @@ import net.ayoentem.storagemanager.utils.database.MySQLConnection;
  */
 public class App extends Application {
 
+    public static int stage_depth = 0;
+
+    private MySQLConnection mysql;
+
     public void start(Stage stage) throws IOException {
 
-        MySQLConnection mysql = new MySQLConnection("localhost", "storagemanager", "root", "", "3306");
+        stage.setTitle("StorageManager v 1.0");
+
+        mysql = new MySQLConnection("localhost", "storagemanager", "root", "", "3306");
         mysql.connect();
 
-        //stage.getIcons().add(new Image("icon.png"));
-        FXMLLoader loadFXML = loadFXML("../utils/fxml/main");
-        Parent view = loadFXML.load();
-        view.getStylesheets().add("/Stats.css");
-
-        MainController controller = loadFXML.getController();
-        controller.init2(stage, mysql);
-
-        Scene scene = new Scene(view);
-        stage.setScene(scene);
-        stage.setTitle("StorageManager v1.0.0");
-        stage.show();
-    }
-
-    public FXMLLoader loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-        return fxmlLoader;
+        switchScreen(null, App.class.getResource("../utils/fxml/main.fxml"), stage);
     }
 
     public static void main(String[] args) {
         launch();
     }
-    
-    public static void switchScreen(File file, String fxml, Stage stage, String pathStyleSheet, MySQLConnection connection) throws IOException{
-            FXMLLoader loader = new FXMLLoader(StatsController.class.getResource(fxml));
 
-            Parent neueView = loader.load();
+    public void switchScreen(File file, URL url, Stage stage) throws IOException {
+        try {
+            FXMLLoader loader = new FXMLLoader(url);
 
-            StatsController statsController = loader.getController();
-            statsController.init2(file, stage, connection);
+            if (App.stage_depth > 1) {
 
-            Scene scene = new Scene(neueView);
-            
-            if(!pathStyleSheet.equalsIgnoreCase(" ")) scene.getStylesheets().add(pathStyleSheet);
-            
+                StatsController statsController = loader.getController();
+                statsController.init2(this, file, stage, mysql);
+
+            } else if (App.stage_depth <= 1) {
+
+                MainController controller = loader.getController();
+                controller.init2(this, stage, mysql);
+
+                if(App.stage_depth == 0){
+                    App.stage_depth++;
+                    return;
+                }
+
+
+                App.stage_depth--;
+
+            }
+
+            Parent newView = loader.load();
+
+            Scene scene = new Scene(newView);
+
+            addJMetroStyle(scene);
             stage.setScene(scene);
             stage.show();
+
+        } catch (NullPointerException ex) {
+
+        }
     }
 
-    public static void switchToMainScreen(Stage stage, MySQLConnection connection) throws IOException {
-        FXMLLoader loader = new FXMLLoader(MainController.class.getResource("../utils/fxml/main.fxml"));
-
-        Parent neueView = loader.load();
-
-        MainController mainController = new MainController();
-        mainController.init2(stage, connection);
-
-        Scene scene = new Scene(neueView);
-
-        scene.getStylesheets().add("/Stats.css");
-
-        stage.setScene(scene);
-        stage.show();
+    private void addJMetroStyle(Scene scene) {
+        JMetro jMetro = new JMetro(Style.DARK);
+        jMetro.setAutomaticallyColorPanes(true);
+        jMetro.setScene(scene);
     }
 
 }

@@ -58,12 +58,17 @@ public class StatsController {
     private ObservableList<String> fileList = FXCollections.observableArrayList();
     private HashMap<String, File> fileMap = new HashMap<>();
     private Timeline task;
+    private App app;
 
-    public void init2(File file, Stage stage, MySQLConnection connection) {
+    public void init2(App app, File file, Stage stage, MySQLConnection connection) {
+        this.app = app;
         this.connection = connection;
         this.stage = stage;
+
         lblPath.setText("Search for Files in " + file.getPath());
+
         loading();
+
         task.setOnFinished(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
@@ -103,13 +108,12 @@ public class StatsController {
     @FXML
     public void goBack(MouseEvent event){
         try{
-            App.switchScreen(file.getParentFile(), "../utils/fxml/stats.fxml", this.stage, "/Stats.css", this.connection);
-        }catch (IOException ex) {
-            try {
-                App.switchToMainScreen(this.stage, this.connection);
-            } catch (IOException e) {
-                e.printStackTrace();
+            if(App.stage_depth == 1){
+                app.switchScreen(file.getParentFile(), App.class.getResource("../utils/fxml/main.fxml"), this.stage);
+            }else{
+                app.switchScreen(file.getParentFile(), StatsController.class.getResource("../utils/fxml/stats.fxml"), this.stage);
             }
+        }catch (IOException ex) {
             lblError.setText(ex.getMessage());
         }
     }
@@ -125,7 +129,7 @@ public class StatsController {
         File file = new File(selectedItem.getDirectory());
         if (selectedItem.getFiDiContain() != 0) {
             try {
-                App.switchScreen(file, "../utils/fxml/stats.fxml", this.stage, "/Stats.css", this.connection);
+                app.switchScreen(file, StatsController.class.getResource("../utils/fxml/stats.fxml"), this.stage);
             } catch (IOException ex) {
                 lblError.setText(ex.getMessage());
             }

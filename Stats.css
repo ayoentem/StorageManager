@@ -1,4 +1,8 @@
-* {
+/*
+
+{
+
+
     -color : #2ecc71;
     -white : #efefef;
     -gray : #dfdfdf;
@@ -13,7 +17,6 @@
     -fx-color : -color;
     -fx-fill-height : true;
     -fx-font-family: 'Segoe UI';
-    /* remove the ugly focus shade */
     -fx-focus-color : transparent;
     -fx-faint-focus-color: transparent;
 }
@@ -73,21 +76,12 @@
     -fx-padding : 10;
 }
 
-/*
- * **********
- * LABELS
- * **********
-*/
+
 .label{
     -fx-text-fill : -black;
 }
 
-/*
- * **********
- * BUTTONS
- * **********
- *
- */
+
 .button {
     -fx-background-color : -gray,-gray,-gray,-gray;
 }
@@ -139,12 +133,6 @@
 }
 
 
-/*
- * **********
- * PROGRESSBAR
- * **********
- *
- */
 .progress-indicator {
     -fx-indeterminate-segment-count : 12;
     -fx-progress-color : -color;
@@ -167,12 +155,7 @@
     -fx-background-color : -gray;
 }
 
-/*
-* **********
-* DATE PICKER
-* **********
-*
-*/
+
 .date-picker{
     -fx-background-color : -white,-gray,gray;
 }
@@ -184,12 +167,7 @@
 .date-picker>*.arrow-button>*.arrow{
     -fx-background-color : -darkGray, -black;
 }
-/*
- * **********
- * SLIDER
- * **********
- *
- */
+
 .slider>*.track{
     -fx-background-color : -gray;
 }
@@ -201,12 +179,7 @@
     -fx-background-color : -color;
 }
 
-/*
- * **********
- * COMBOBOX
- * **********
- *
- */
+
 .combo-box {
     -fx-background-color : -gray;
 }
@@ -216,12 +189,6 @@
 }
 
 
-/*
- * **********
- * TABPANE
- * **********
- *
- */
 .tab-pane>*.tab-header-area{
     -fx-padding : 0,0,0,0;
 }
@@ -250,23 +217,13 @@
 }
 
 
-/*
- * **********
- * MENU
- * **********
- *
- */
+
 .menu-bar{
     -fx-background-color : -gray;
 }
 
 
-/*
- * **********
- * Checkbox
- * **********
- *
- */
+
 .check-box>*.box{
     -fx-background-color : -gray;
 }
@@ -279,12 +236,7 @@
 }
 
 
-/*
-* **********
-* RADIO BUTTONS
-* **********
-*
-*/
+
 .radio-button>*.radio{
     -fx-background-color : -gray;
 }
@@ -293,12 +245,7 @@
     -fx-background-color : -black;
 }
 
-/*
- * **********
- * Text fields / inputs
- * **********
- *
- */
+
 .text-field{
     -fx-highlight-fill : -color;
     -fx-highlight-text-fill : -white;
@@ -316,12 +263,6 @@
 .spinner>*.decrement-arrow-button{
     -fx-background-color : -gray;
 }
-/*
- * **********
- * Titled Pane
- * **********
- *
- */
 
 .first-titled-pane:expanded>*.title{
     -fx-background-color : -color;
@@ -339,12 +280,7 @@
     -fx-background-color : -black;
 }
 
-/*
- * **********
- * Table
- * **********
- *
- */
+
 .table-view:row-selection{
     -fx-background-color : -gray;
 }
@@ -395,22 +331,10 @@
 }
 
 
-/*
- * **********
- * Color picker
- * **********
- *
- */
 .color-picker{
     -fx-background-color : -gray;
 }
 
-/*
- * **********
- * Scroll pane
- * **********
- *
- */
 .scroll-pane>*.scroll-bar{
     -fx-background-color : -gray;
 }
@@ -418,3 +342,4 @@
 .scroll-pane>*.scroll-bar>*.thumb{
     -fx-background-color : -color;
 }
+*/
