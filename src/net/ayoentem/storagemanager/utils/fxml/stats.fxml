@@ -13,7 +13,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" fx:id="root" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.ayoentem.storagemanager.main.StatsController">
+<AnchorPane id="AnchorPane" fx:id="root" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.ayoentem.storagemanager.utils.controller.StatsController">
    <children>
       <SplitPane fx:id="splitPane" cache="true" cacheHint="QUALITY" depthTest="ENABLE" dividerPositions="0.5" focusTraversable="false" layoutX="10.0" layoutY="10.0" orientation="VERTICAL" prefHeight="801.0" prefWidth="878.0" style="-fx-padding: 0 0.75em 0 0.75em; -fx-border-color: azure;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>

@@ -7,7 +7,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="javafx-sdk-11.0" level="project" />
     <orderEntry type="library" name="org.jfxtras:jmetro:8.6.9" level="project" />
+    <orderEntry type="library" name="org.projectlombok:lombok:1.18.16" level="project" />
+    <orderEntry type="library" name="mysql:mysql-connector-java:5.1.47" level="project" />
+    <orderEntry type="library" name="org.openjfx:javafx-base:11.0.2" level="project" />
   </component>
 </module>

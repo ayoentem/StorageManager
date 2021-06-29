@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package net.ayoentem.storagemanager.main;
+package net.ayoentem.storagemanager.utils.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,7 +25,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import net.ayoentem.storagemanager.utils.database.MySQLConnection;
+import net.ayoentem.storagemanager.main.App;
+import net.ayoentem.storagemanager.main.Volume;
 
 /**
  * FXML Controller class
@@ -51,8 +52,6 @@ public class StatsController {
     @FXML
     private Button btnBack;
 
-    private MySQLConnection connection;
-
     private Stage stage;
     private File file;
     private ObservableList<String> fileList = FXCollections.observableArrayList();
@@ -60,9 +59,8 @@ public class StatsController {
     private Timeline task;
     private App app;
 
-    public void init2(App app, File file, Stage stage, MySQLConnection connection) {
+    public void init2(App app, File file, Stage stage) {
         this.app = app;
-        this.connection = connection;
         this.stage = stage;
 
         lblPath.setText("Search for Files in " + file.getPath());
@@ -107,15 +105,18 @@ public class StatsController {
 
     @FXML
     public void goBack(MouseEvent event){
+        /*
         try{
+            System.out.println("Depth: " + App.stage_depth);
             if(App.stage_depth == 1){
-                app.switchScreen(file.getParentFile(), App.class.getResource("../utils/fxml/main.fxml"), this.stage);
-            }else{
+                app.switchScreen(file.getParentFile(), MainController.class.getResource("../utils/fxml/main.fxml"), this.stage);
+            }else if(App.stage_depth > 1){
                 app.switchScreen(file.getParentFile(), StatsController.class.getResource("../utils/fxml/stats.fxml"), this.stage);
             }
         }catch (IOException ex) {
             lblError.setText(ex.getMessage());
         }
+         */
     }
 
     @FXML
@@ -128,14 +129,17 @@ public class StatsController {
         Volume selectedItem = tableView.getSelectionModel().getSelectedItem();
         File file = new File(selectedItem.getDirectory());
         if (selectedItem.getFiDiContain() != 0) {
+            /*
             try {
                 app.switchScreen(file, StatsController.class.getResource("../utils/fxml/stats.fxml"), this.stage);
             } catch (IOException ex) {
                 lblError.setText(ex.getMessage());
             }
+            */
         } else {
             lblError.setText("Dieses Verzeichnis hat keine Dateien");
         }
+
 
     }
 

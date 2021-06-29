@@ -1,61 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" fillWidth="false" prefHeight="481.0" prefWidth="729.0" spacing="20.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.ayoentem.storagemanager.main.MainController">
+<VBox alignment="CENTER" fillWidth="false" prefHeight="295.0" prefWidth="729.0" spacing="20.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.ayoentem.storagemanager.utils.controller.MainController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
     <children>
         <AnchorPane prefHeight="441.0" prefWidth="953.0">
             <children>
-                <ListView fx:id="chartList" layoutX="287.0" layoutY="197.0" onMouseClicked="#clickedON" prefHeight="218.0" prefWidth="388.0" />
-                <Label alignment="CENTER" layoutY="-2.0" prefHeight="32.0" prefWidth="206.0" text="Storage Manager">
-                    <font>
-                        <Font name="Arial Bold" size="21.0" />
-                    </font>
-                </Label>
-                <Label alignment="CENTER" layoutX="414.0" layoutY="173.0" prefHeight="17.0" prefWidth="135.0" text="Drivers" textAlignment="CENTER">
+                <ListView fx:id="chartList" layoutX="12.0" layoutY="30.0" onMouseClicked="#clickedON" prefHeight="218.0" prefWidth="666.0" />
+                <Label alignment="CENTER" layoutX="277.0" layoutY="6.0" prefHeight="17.0" prefWidth="135.0" text="Drivers" textAlignment="CENTER">
                     <font>
                         <Font name="Arial Bold" size="15.0" />
                     </font>
                 </Label>
-                <Label layoutX="7.0" layoutY="59.0" prefHeight="17.0" prefWidth="135.0" text="Backup">
+                <Label layoutX="352.0" layoutY="298.0" prefHeight="17.0" prefWidth="59.0" text="Backup">
                     <font>
                         <Font name="Arial Bold" size="15.0" />
                     </font>
                 </Label>
-                <TextField fx:id="txtPathData" layoutX="14.0" layoutY="88.0" prefHeight="25.0" prefWidth="350.0" promptText="Path from Datas" />
-                <Button fx:id="btnChoose1" layoutX="373.0" layoutY="88.0" mnemonicParsing="false" onMouseClicked="#chooseDirectory1" text="Choose">
+                <TextField fx:id="txtPathData" layoutX="352.0" layoutY="337.0" prefHeight="25.0" prefWidth="265.0" promptText="Path from Datas" />
+                <Button fx:id="btnChoose1" layoutX="559.0" layoutY="336.0" mnemonicParsing="false" onMouseClicked="#chooseDirectory1" prefHeight="25.0" prefWidth="58.0" text="Choose">
                     <font>
                         <Font name="Arial" size="12.0" />
                     </font>
                 </Button>
-                <Button fx:id="btnBackup" layoutX="14.0" layoutY="371.0" mnemonicParsing="false" onMouseClicked="#doBackup" text="Backup now" />
-            <Label layoutX="7.0" layoutY="197.0" prefHeight="17.0" prefWidth="135.0" text="Restore">
+                <Button fx:id="btnBackup" layoutX="352.0" layoutY="373.0" mnemonicParsing="false" onMouseClicked="#doBackup" prefHeight="7.0" prefWidth="81.0" text="Backup now" />
+            <Label layoutX="8.0" layoutY="298.0" prefHeight="17.0" prefWidth="135.0" text="Restore">
                <font>
                   <Font name="Arial Bold" size="15.0" />
                </font>
             </Label>
-            <ChoiceBox fx:id="listBackups" layoutX="7.0" layoutY="294.0" prefWidth="150.0" />
-            <Button fx:id="btnChoose11" layoutX="177.0" layoutY="295.0" mnemonicParsing="false" text="Restore">
+            <ChoiceBox fx:id="listBackups" layoutX="8.0" layoutY="337.0" prefWidth="150.0" />
+            <Button fx:id="btnChoose11" layoutX="179.0" layoutY="336.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="59.0" text="Restore">
                <font>
                   <Font name="Arial" size="12.0" />
                </font>
             </Button>
-            <Label layoutX="14.0" layoutY="419.0" prefHeight="17.0" prefWidth="447.0" textFill="RED">
+            <Label layoutY="405.0" prefHeight="17.0" prefWidth="447.0" textFill="RED">
                <font>
                   <Font name="Arial" size="12.0" />
                </font>
             </Label>
-            <Label fx:id="lblLastBackup" contentDisplay="TEXT_ONLY" focusTraversable="false" layoutX="14.0" layoutY="146.0" prefHeight="17.0" prefWidth="256.0" text="Last Backup:  ">
+            <Label fx:id="lblLastBackup" alignment="CENTER" contentDisplay="TEXT_ONLY" focusTraversable="false" layoutX="12.0" layoutY="259.0" prefHeight="17.0" prefWidth="666.0" text="Last Backup:  ">
                <font>
                   <Font name="Arial" size="12.0" />
                </font></Label>

@@ -4,10 +4,10 @@ import lombok.Getter;
 
 import java.sql.*;
 
-@Getter
 public class MySQLConnection {
 
-    public MySQLConnection mysql;
+    @Getter
+    private static MySQLConnection mysql;
 
     private String host;
     private String database;
@@ -18,7 +18,7 @@ public class MySQLConnection {
     public Connection connection;
 
     public MySQLConnection(String host, String database, String user, String password, String port){
-        this.mysql = this;
+        MySQLConnection.mysql = this;
 
         this.host = host;
         this.database = database;

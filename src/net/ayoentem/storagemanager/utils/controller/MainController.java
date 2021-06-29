@@ -1,4 +1,4 @@
-package net.ayoentem.storagemanager.main;
+package net.ayoentem.storagemanager.utils.controller;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.Stage;
 import net.ayoentem.storagemanager.utils.backup.BackUp;
 import net.ayoentem.storagemanager.utils.database.MySQLConnection;
 
@@ -28,23 +27,15 @@ public class MainController {
     @FXML
     private Button btnBackup;
 
-    private Stage stage;
-    private MySQLConnection connection;
     private BackUp backUp;
-    private App app;
 
-    
-    public void init2(App app, Stage stage, MySQLConnection connection) {
-        this.app = app;
-        this.stage = stage;
-        this.connection = connection;
-
+    public void init2() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.YYYY");
 
         File[] listRoots = File.listRoots();
 
         //Load RestoreList
-        backUp = new BackUp(connection, listBackups);
+        backUp = new BackUp(MySQLConnection.getMysql(), listBackups);
         backUp.init();
 
         //Load Drivers
@@ -52,35 +43,48 @@ public class MainController {
             System.out.println(listRoots[i].getPath().substring(0, 1));
             chartList.getItems().add(listRoots[i].getPath().substring(0, 1) + "-Laufwerk");
         }
+
+        /**
+         * TODO: Set Image close to every single data in listview
+         */
+        /*
+        chartList.setCellFactory(param -> new ListCell<String>(){
+
+            private ImageView imageView = new ImageView();
+
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+
+                //imageView.setImage(new Image("../utils/icons/flash-drive.png"));
+
+                setGraphic(imageView);
+            }
+        });
+         */
+
     }
 
     @FXML
-    public void initialize() {
-
-    }
-
-    @FXML
-    public void chooseDirectory1(MouseEvent event){
+    public void chooseDirectory1(MouseEvent event) {
         DirectoryChooser chooser = new DirectoryChooser();
         chooser.setTitle("Choose the Directory");
         File file = chooser.showDialog(null);
-        if(file == null)return;
+        if (file == null) return;
         txtPathData.setText(file.getPath());
     }
 
     @FXML
     public void clickedON(MouseEvent event) {
         File file = new File(chartList.getSelectionModel().getSelectedItem().substring(0, 1) + ":/");
-        try {
-            app.switchScreen(file, StatsController.class.getResource("../utils/fxml/stats.fxml"), this.stage);
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        /**
+         * TODO: Switch to Stats Screen
+         */
+        //app.switchScreen(file, StatsController.class.getResource("../utils/fxml/stats.fxml"), this.stage);
     }
 
     @FXML
-    public void doBackup(MouseEvent event){
+    public void doBackup(MouseEvent event) {
         this.backUp.createBackup(this.txtPathData.getText());
     }
 

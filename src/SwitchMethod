@@ -1,0 +1,40 @@
+public void switchScreen(File file, URL url, Stage stage) throws IOException {
+        try {
+            FXMLLoader loader = new FXMLLoader(url);
+
+            Parent newView = loader.load();
+
+            if(loader.getLocation().toString().endsWith("main.fxml")){
+                System.out.println("main");
+            }else if(loader.getLocation().toString().endsWith("stats.fxml")){
+                System.out.println("stats");
+            }
+
+            if ((App.stage_depth < 1 || App.stage_depth > 1) && App.stage_depth != 0) {
+
+                StatsController statsController = loader.getController();
+                statsController.init2(this, file, stage);
+
+            } else if (App.stage_depth == 1) {
+
+                if(loader.getLocation().toString().endsWith("main.fxml")){
+                    MainController controller = loader.getController();
+                    controller.init2(this, stage);
+                    App.stage_depth--;
+                }else if(loader.getLocation().toString().endsWith("stats.fxml")){
+                    StatsController statsController = loader.getController();
+                    statsController.init2(this, file, stage);
+                    App.stage_depth++;
+                }
+            }
+
+            Scene scene = new Scene(newView);
+
+            addJMetroStyle(scene);
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (NullPointerException ex) {
+            ex.printStackTrace();
+        }
+    }
