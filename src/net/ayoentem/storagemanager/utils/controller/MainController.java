@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
+import net.ayoentem.storagemanager.main.App;
 import net.ayoentem.storagemanager.utils.backup.BackUp;
 import net.ayoentem.storagemanager.utils.database.MySQLConnection;
 
@@ -40,7 +41,6 @@ public class MainController {
 
         //Load Drivers
         for (int i = 0; i < listRoots.length; i++) {
-            System.out.println(listRoots[i].getPath().substring(0, 1));
             chartList.getItems().add(listRoots[i].getPath().substring(0, 1) + "-Laufwerk");
         }
 
@@ -77,10 +77,11 @@ public class MainController {
     @FXML
     public void clickedON(MouseEvent event) {
         File file = new File(chartList.getSelectionModel().getSelectedItem().substring(0, 1) + ":/");
-        /**
-         * TODO: Switch to Stats Screen
-         */
-        //app.switchScreen(file, StatsController.class.getResource("../utils/fxml/stats.fxml"), this.stage);
+        try {
+            App.switcher.switchToStats(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

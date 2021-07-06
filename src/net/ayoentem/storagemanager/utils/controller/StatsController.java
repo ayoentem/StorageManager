@@ -59,10 +59,7 @@ public class StatsController {
     private Timeline task;
     private App app;
 
-    public void init2(App app, File file, Stage stage) {
-        this.app = app;
-        this.stage = stage;
-
+    public void init(File file) {
         lblPath.setText("Search for Files in " + file.getPath());
 
         loading();
@@ -105,6 +102,17 @@ public class StatsController {
 
     @FXML
     public void goBack(MouseEvent event){
+        System.out.println(this.file.getPath());
+        /**
+         * TODO: Check which stage
+         */
+        /*
+        if(this.file.getPath().endsWith("\\") == 1){
+            System.out.println("main");
+        }else{
+            System.out.println("stats");
+        }
+         */
         /*
         try{
             System.out.println("Depth: " + App.stage_depth);
@@ -129,13 +137,11 @@ public class StatsController {
         Volume selectedItem = tableView.getSelectionModel().getSelectedItem();
         File file = new File(selectedItem.getDirectory());
         if (selectedItem.getFiDiContain() != 0) {
-            /*
             try {
-                app.switchScreen(file, StatsController.class.getResource("../utils/fxml/stats.fxml"), this.stage);
+                App.switcher.switchToStats(file);
             } catch (IOException ex) {
                 lblError.setText(ex.getMessage());
             }
-            */
         } else {
             lblError.setText("Dieses Verzeichnis hat keine Dateien");
         }
